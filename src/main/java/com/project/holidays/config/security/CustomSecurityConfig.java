@@ -31,6 +31,7 @@ class CustomSecurityConfig {
                         .logoutSuccessUrl("/login?logout").permitAll()
                 );
         http.csrf().ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"));
+        http.csrf().ignoringRequestMatchers(new AntPathRequestMatcher("/registration"));
         http.headers().frameOptions().sameOrigin();
         return http.build();
     }
