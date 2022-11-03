@@ -3,6 +3,7 @@ package com.project.holidays.domain.holiday;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,7 +16,9 @@ public class HolidayService {
     }
 
     public Optional<Holiday> findHolidayById(Long id) {
-        System.out.println("Byłem w serwisie holidays");
         return holidayRepository.findById(id);
+    }
+    public List<Holiday> findApproveHolidays(){
+        return holidayRepository.findHolidaysByIsApprovedIsTrue();
     }
 }
