@@ -5,4 +5,11 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
+    <include file="0001_create_holiday_table.xml" relativeToChangelogFile="true" />
+    <include file="0002_create_employee_table.xml" relativeToChangelogFile="true" />
+
+    <include file="../testdata/0001_holidays.sql" relativeToChangelogFile="true" context="dev"/>
+    <include file="../testdata/0002_employees.sql" relativeToChangelogFile="true" context="dev"/>
+    <include file="../testdata/0003_employee_holidays.sql" relativeToChangelogFile="true" context="dev"/>
+
 </databaseChangeLog>
