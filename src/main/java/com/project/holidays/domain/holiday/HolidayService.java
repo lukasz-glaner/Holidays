@@ -21,4 +21,9 @@ public class HolidayService {
     public List<Holiday> findApproveHolidays(){
         return holidayRepository.findHolidaysByIsApprovedIsTrue();
     }
+
+    public Holiday createHoliday(Holiday holidayToAdd) {
+        Holiday savedHoliday = holidayRepository.save(holidayToAdd);
+        return savedHoliday;
+    }
 }
