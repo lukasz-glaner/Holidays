@@ -23,29 +23,30 @@ public class HolidayController {
     }
 
     @GetMapping("/holidays")
-    public ResponseEntity<Holiday> getHolidayById(@RequestParam Long id)  {
+    public ResponseEntity<Holiday> getHolidayById(@RequestParam Long id) {
         return holidayService.findHolidayById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
     @GetMapping("/holidays/approved")
-    public ResponseEntity<List<Holiday>> getApprovedHoliday()  {
+    public ResponseEntity<List<Holiday>> getApprovedHoliday() {
         List<Holiday> approvedHolidays = holidayService.findApproveHolidays();
         return ResponseEntity.ok(approvedHolidays);
     }
 
     @Transactional
     @PostMapping("/holidays/add")
-    public ResponseEntity addHoliday(@RequestBody HolidayAddDto holidayAddDto){
+    public ResponseEntity addHoliday(@RequestBody HolidayAddDto holidayAddDto) {
         Holiday holidayToAdd = new Holiday();
         holidayToAdd.setStartDate(holidayAddDto.getStartDate());
         holidayToAdd.setEndDate(holidayAddDto.getEndDate());
         holidayToAdd.setApproverId(holidayAddDto.getApproverId());
         holidayToAdd.setApproved(false);
-
-       Holiday savedHoliday = holidayService.createHoliday(holidayToAdd);
-
-        return ResponseEntity.created(URI.create("/holidays?id="+ savedHoliday.getId()))
+        Holiday savedHoliday = holidayService.createHoliday(holidayToAdd);
+        return ResponseEntity.created(URI.create("/holidays?id=" + savedHoliday.getId()))
                 .body(savedHoliday);
     }
+
+
 }
