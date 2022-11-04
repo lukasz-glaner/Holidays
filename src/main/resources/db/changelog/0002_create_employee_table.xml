@@ -38,9 +38,9 @@
     </changeSet>
 </databaseChangeLog>
 
-<!--<column name="holiday_id" type="BIGINT">-->
-<!--<constraints nullable="false"-->
-<!--             foreignKeyName="fk_holiday_id"-->
-<!--             referencedTableName="holiday"-->
-<!--             referencedColumnNames="id"/>-->
-<!--</column>-->
+        <!--<column name="holiday_id" type="BIGINT">-->
+        <!--<constraints nullable="false"-->
+        <!--             foreignKeyName="fk_holiday_id"-->
+        <!--             referencedTableName="holiday"-->
+        <!--             referencedColumnNames="id"/>-->
+        <!--</column>-->

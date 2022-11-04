@@ -15,15 +15,16 @@ public class EmployeeController {
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
+
     @GetMapping("/employees")
-    public ResponseEntity<Employee> getEmployeeByEmail(@RequestParam String email)  {
+    public ResponseEntity<Employee> getEmployeeByEmail(@RequestParam String email) {
         return employeeService.findEmployeeByEmail(email)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/employees/id")
-    public ResponseEntity<Employee> getEmployeeById(@RequestParam Long id)  {
+    public ResponseEntity<Employee> getEmployeeById(@RequestParam Long id) {
         return employeeService.findEmployeeById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

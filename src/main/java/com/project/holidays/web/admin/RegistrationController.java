@@ -20,7 +20,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public ResponseEntity<Employee> register(@RequestBody EmployeeRegistrationDto registrationDto){
+    public ResponseEntity<Employee> register(@RequestBody EmployeeRegistrationDto registrationDto) {
         Employee registeredEmployee = employeeService.registerEmployee(registrationDto);
         return ResponseEntity.created(URI.create("/employees/id?id=" + registeredEmployee.getId()))
                 .body(registeredEmployee);

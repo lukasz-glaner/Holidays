@@ -37,15 +37,18 @@ public class HolidayController {
 
     @Transactional
     @PostMapping("/holidays/add")
-    public ResponseEntity addHoliday(@RequestBody HolidayAddDto holidayAddDto) {
-        Holiday holidayToAdd = new Holiday();
-        holidayToAdd.setStartDate(holidayAddDto.getStartDate());
-        holidayToAdd.setEndDate(holidayAddDto.getEndDate());
-        holidayToAdd.setApproverId(holidayAddDto.getApproverId());
-        holidayToAdd.setApproved(false);
+    public ResponseEntity<?> addHoliday(@RequestBody HolidayAddDto holidayAddDto) {
+        Holiday holidayToAdd = prepareHolidayToAdd(holidayAddDto);
         Holiday savedHoliday = holidayService.createHoliday(holidayToAdd);
         return ResponseEntity.created(URI.create("/holidays?id=" + savedHoliday.getId()))
                 .body(savedHoliday);
+    }
+
+    private Holiday prepareHolidayToAdd(HolidayAddDto holidayAddDto) {
+        return new Holiday(holidayAddDto.getStartDate(),
+                holidayAddDto.getEndDate(),
+                holidayAddDto.getApproverId(),
+                false);
     }
 
 

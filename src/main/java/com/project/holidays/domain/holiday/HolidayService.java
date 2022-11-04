@@ -20,7 +20,8 @@ public class HolidayService {
     public Optional<Holiday> findHolidayById(Long id) {
         return holidayRepository.findById(id);
     }
-    public List<Holiday> findApproveHolidays(){
+
+    public List<Holiday> findApproveHolidays() {
         return holidayRepository.findHolidaysByIsApprovedIsTrue();
     }
 

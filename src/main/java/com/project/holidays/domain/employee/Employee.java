@@ -17,7 +17,7 @@ public class Employee {
     private String firstName;
     private String lastName;
     @OneToMany
-    private Set<Holiday> holidays  = new HashSet<>();
+    private Set<Holiday> holidays = new HashSet<>();
 
     public Employee() {
     }
