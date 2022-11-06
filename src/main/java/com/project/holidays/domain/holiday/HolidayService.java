@@ -1,6 +1,7 @@
 package com.project.holidays.domain.holiday;
 
 import com.project.holidays.domain.employee.EmployeeRepository;
+import com.project.holidays.domain.holiday.dto.HolidayDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,14 +22,22 @@ public class HolidayService {
         return holidayRepository.findById(id);
     }
 
-    public List<Holiday> findApproveHolidays() {
-        return holidayRepository.findHolidaysByApprovedIsTrue();
+    public Optional<HolidayDto> findHolidayByIdReturnDto(Long id) {
+        return this.findHolidayById(id).map(HolidayDtoMapper::map);
     }
 
-    public Holiday createHoliday(Holiday holidayToAdd) {
+    public List<HolidayDto> findApprovedHolidays() {
+        List<Holiday> holidayList = holidayRepository.findHolidaysByApprovedIsTrue();
+        return holidayList
+                .stream()
+                .map(HolidayDtoMapper::map)
+                .toList();
+    }
+
+    public HolidayDto createHoliday(Holiday holidayToAdd) {
         Holiday savedHoliday = holidayRepository.save(holidayToAdd);
         employeeRepository.findById(1L).orElseThrow().getHolidays().add(savedHoliday);
-        return savedHoliday;
+        return HolidayDtoMapper.map(savedHoliday);
     }
 
     public void updateHoliday(Holiday holiday) {

@@ -8,6 +8,7 @@ import com.github.fge.jsonpatch.mergepatch.JsonMergePatch;
 import com.project.holidays.domain.holiday.Holiday;
 import com.project.holidays.domain.holiday.HolidayService;
 import com.project.holidays.domain.holiday.dto.HolidayAddDto;
+import com.project.holidays.domain.holiday.dto.HolidayDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -27,15 +28,15 @@ public class HolidayController {
     }
 
     @GetMapping("/holidays")
-    public ResponseEntity<Holiday> getHolidayById(@RequestParam Long id) {
-        return holidayService.findHolidayById(id)
+    public ResponseEntity<HolidayDto> getHolidayById(@RequestParam Long id) {
+        return holidayService.findHolidayByIdReturnDto(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/holidays/approved")
-    public ResponseEntity<List<Holiday>> getApprovedHoliday() {
-        List<Holiday> approvedHolidays = holidayService.findApproveHolidays();
+    public ResponseEntity<List<HolidayDto>> getApprovedHoliday() {
+        List<HolidayDto> approvedHolidays = holidayService.findApprovedHolidays();
         return ResponseEntity.ok(approvedHolidays);
     }
 
@@ -43,7 +44,7 @@ public class HolidayController {
     @PostMapping("/holidays/add")
     public ResponseEntity<?> addHoliday(@RequestBody HolidayAddDto holidayAddDto) {
         Holiday holidayToAdd = prepareHolidayToAdd(holidayAddDto);
-        Holiday savedHoliday = holidayService.createHoliday(holidayToAdd);
+        HolidayDto savedHoliday = holidayService.createHoliday(holidayToAdd);
         return ResponseEntity.created(URI.create("/holidays?id=" + savedHoliday.getId()))
                 .body(savedHoliday);
     }
