@@ -9,7 +9,6 @@ import com.project.holidays.domain.holiday.Holiday;
 import com.project.holidays.domain.holiday.HolidayService;
 import com.project.holidays.domain.holiday.dto.HolidayAddDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +16,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-@Controller
+@RestController
 public class HolidayController {
     private final HolidayService holidayService;
     private final ObjectMapper objectMapper;

@@ -2,13 +2,12 @@ package com.project.holidays.web;
 
 import com.project.holidays.domain.employee.Employee;
 import com.project.holidays.domain.employee.EmployeeService;
-import com.project.holidays.domain.holiday.Holiday;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class EmployeeController {
     private final EmployeeService employeeService;
 
