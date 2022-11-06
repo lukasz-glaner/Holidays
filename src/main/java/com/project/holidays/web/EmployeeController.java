@@ -2,6 +2,7 @@ package com.project.holidays.web;
 
 import com.project.holidays.domain.employee.Employee;
 import com.project.holidays.domain.employee.EmployeeService;
+import com.project.holidays.domain.employee.dto.EmployeeDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,14 +17,14 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees")
-    public ResponseEntity<Employee> getEmployeeByEmail(@RequestParam String email) {
+    public ResponseEntity<EmployeeDto> getEmployeeByEmail(@RequestParam String email) {
         return employeeService.findEmployeeByEmail(email)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/employees/id")
-    public ResponseEntity<Employee> getEmployeeById(@RequestParam Long id) {
+    public ResponseEntity<EmployeeDto> getEmployeeById(@RequestParam Long id) {
         return employeeService.findEmployeeById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

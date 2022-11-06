@@ -1,5 +1,6 @@
 package com.project.holidays.domain.employee;
 
+import com.project.holidays.domain.employee.dto.EmployeeDto;
 import com.project.holidays.domain.employee.dto.EmployeeRegistrationDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,18 +12,17 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
-
     public EmployeeService(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
 
-    public Optional<Employee> findEmployeeByEmail(String email) {
-        return employeeRepository.findByEmail(email);
+    public Optional<EmployeeDto> findEmployeeByEmail(String email) {
+        Optional<Employee> employee = employeeRepository.findByEmail(email);
+        return employee.map(EmployeeDtoMapper::map);
     }
-
-    public Optional<Employee> findEmployeeById(Long id) {
-        System.out.println("Byłem w poszukiwanie employee");
-        return employeeRepository.findById(id);
+    public Optional<EmployeeDto> findEmployeeById(Long id) {
+        Optional<Employee> employee = employeeRepository.findById(id);
+        return employee.map(EmployeeDtoMapper::map);
     }
 
     @Transactional
