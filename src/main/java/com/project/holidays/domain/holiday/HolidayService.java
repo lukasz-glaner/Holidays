@@ -22,12 +22,16 @@ public class HolidayService {
     }
 
     public List<Holiday> findApproveHolidays() {
-        return holidayRepository.findHolidaysByIsApprovedIsTrue();
+        return holidayRepository.findHolidaysByApprovedIsTrue();
     }
 
     public Holiday createHoliday(Holiday holidayToAdd) {
         Holiday savedHoliday = holidayRepository.save(holidayToAdd);
         employeeRepository.findById(1L).orElseThrow().getHolidays().add(savedHoliday);
         return savedHoliday;
+    }
+
+    public void updateHoliday(Holiday holiday) {
+        holidayRepository.save(holiday);
     }
 }

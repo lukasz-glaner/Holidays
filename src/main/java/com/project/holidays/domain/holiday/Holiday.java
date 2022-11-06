@@ -1,7 +1,5 @@
 package com.project.holidays.domain.holiday;
 
-import liquibase.pro.packaged.E;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,16 +14,16 @@ public class Holiday {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private Long approverId;
-    private Boolean isApproved;
+    private Boolean approved;
 
     public Holiday() {
     }
 
-    public Holiday(LocalDateTime startDate, LocalDateTime endDate, Long approverId, Boolean isApproved) {
+    public Holiday(LocalDateTime startDate, LocalDateTime endDate, Long approverId, Boolean approved) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.approverId = approverId;
-        this.isApproved = isApproved;
+        this.approved = approved;
     }
 
     public Long getId() {
@@ -61,10 +59,10 @@ public class Holiday {
     }
 
     public Boolean getApproved() {
-        return isApproved;
+        return approved;
     }
 
     public void setApproved(Boolean approved) {
-        isApproved = approved;
+        this.approved = approved;
     }
 }

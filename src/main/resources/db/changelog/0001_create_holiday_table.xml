@@ -12,7 +12,7 @@
             <column name="start_date" type="DATETIME"/>
             <column name="end_date" type="DATETIME"/>
             <column name="approver_id" type="BIGINT"/>
-            <column name="is_approved" type="BOOLEAN"/>
+            <column name="approved" type="BOOLEAN"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface HolidayRepository extends CrudRepository<Holiday, Long> {
-    List<Holiday> findHolidaysByIsApprovedIsTrue();
+    List<Holiday> findHolidaysByApprovedIsTrue();
 
-    List<Holiday> findHolidaysByIsApprovedIsFalse();
+    List<Holiday> findHolidaysByApprovedIsFalse();
 }

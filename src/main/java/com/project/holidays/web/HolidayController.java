@@ -1,25 +1,30 @@
 package com.project.holidays.web;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jsonpatch.JsonPatchException;
+import com.github.fge.jsonpatch.mergepatch.JsonMergePatch;
 import com.project.holidays.domain.holiday.Holiday;
 import com.project.holidays.domain.holiday.HolidayService;
 import com.project.holidays.domain.holiday.dto.HolidayAddDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Controller
 public class HolidayController {
     private final HolidayService holidayService;
+    private final ObjectMapper objectMapper;
 
-    public HolidayController(HolidayService holidayService) {
+    public HolidayController(HolidayService holidayService, ObjectMapper objectMapper) {
         this.holidayService = holidayService;
+        this.objectMapper = objectMapper;
     }
 
     @GetMapping("/holidays")
@@ -51,5 +56,25 @@ public class HolidayController {
                 false);
     }
 
+    @Transactional
+    @PatchMapping("/holidays/{id}")
+    public ResponseEntity<?> updateHoliday(@PathVariable Long id, @RequestBody JsonMergePatch patch) {
+        try {
+            Holiday holiday = holidayService.findHolidayById(id).orElseThrow();
+            Holiday holidayPatched = applyPatch(holiday, patch);
+            holidayService.updateHoliday(holidayPatched);
+        } catch (JsonPatchException | JsonProcessingException e) {
+            return ResponseEntity.internalServerError().build();
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.noContent().build();
+    }
 
+    private Holiday applyPatch(Holiday holiday, JsonMergePatch patch) throws JsonPatchException, JsonProcessingException {
+        JsonNode holidayNode = objectMapper.valueToTree(holiday);
+        JsonNode holidayPatchedNode = patch.apply(holidayNode);
+        return objectMapper.treeToValue(holidayPatchedNode, Holiday.class);
+
+    }
 }
