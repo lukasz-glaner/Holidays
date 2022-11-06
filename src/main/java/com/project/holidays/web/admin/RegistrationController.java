@@ -2,6 +2,7 @@ package com.project.holidays.web.admin;
 
 import com.project.holidays.domain.employee.Employee;
 import com.project.holidays.domain.employee.EmployeeService;
+import com.project.holidays.domain.employee.dto.EmployeeDto;
 import com.project.holidays.domain.employee.dto.EmployeeRegistrationDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,8 +20,8 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public ResponseEntity<Employee> register(@RequestBody EmployeeRegistrationDto registrationDto) {
-        Employee registeredEmployee = employeeService.registerEmployee(registrationDto);
+    public ResponseEntity<EmployeeDto> register(@RequestBody EmployeeRegistrationDto registrationDto) {
+        EmployeeDto registeredEmployee = employeeService.registerEmployee(registrationDto);
         return ResponseEntity.created(URI.create("/employees/id?id=" + registeredEmployee.getId()))
                 .body(registeredEmployee);
     }

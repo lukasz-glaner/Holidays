@@ -20,18 +20,16 @@ public class EmployeeService {
         Optional<Employee> employee = employeeRepository.findByEmail(email);
         return employee.map(EmployeeDtoMapper::map);
     }
+
     public Optional<EmployeeDto> findEmployeeById(Long id) {
         Optional<Employee> employee = employeeRepository.findById(id);
         return employee.map(EmployeeDtoMapper::map);
     }
 
     @Transactional
-    public Employee registerEmployee(EmployeeRegistrationDto registrationDto) {
-        Employee employee = new Employee();
-        employee.setEmail(registrationDto.getEmail());
-        employee.setPassword(registrationDto.getPassword());
-        employee.setFirstName(registrationDto.getFirstName());
-        employee.setLastName(registrationDto.getLastName());
-        return employeeRepository.save(employee);
+    public EmployeeDto registerEmployee(EmployeeRegistrationDto registrationDto) {
+        Employee employee = EmployeeRegistrationDtoMapper.map(registrationDto);
+        Employee savedEmployee = employeeRepository.save(employee);
+        return EmployeeDtoMapper.map(savedEmployee);
     }
 }
