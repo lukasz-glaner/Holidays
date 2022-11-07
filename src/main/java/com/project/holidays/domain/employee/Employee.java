@@ -16,7 +16,7 @@ public class Employee {
     private String password;
     private String firstName;
     private String lastName;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE)
     private Set<Holiday> holidays = new HashSet<>();
 
     public Employee() {

@@ -4,9 +4,7 @@ import com.project.holidays.domain.employee.Employee;
 import com.project.holidays.domain.employee.EmployeeService;
 import com.project.holidays.domain.employee.dto.EmployeeDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class EmployeeController {
@@ -28,5 +26,11 @@ public class EmployeeController {
         return employeeService.findEmployeeById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/employees/{id}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable Long id){
+        employeeService.deleteEmployee(id);
+        return ResponseEntity.noContent().build();
     }
 }

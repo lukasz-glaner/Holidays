@@ -43,4 +43,8 @@ public class HolidayService {
     public void updateHoliday(Holiday holiday) {
         holidayRepository.save(holiday);
     }
+
+    public void deleteHoliday(Long id){
+        holidayRepository.deleteById(id);
+    }
 }

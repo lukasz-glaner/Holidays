@@ -75,6 +75,11 @@ public class HolidayController {
         JsonNode holidayNode = objectMapper.valueToTree(holiday);
         JsonNode holidayPatchedNode = patch.apply(holidayNode);
         return objectMapper.treeToValue(holidayPatchedNode, Holiday.class);
+    }
 
+    @DeleteMapping("/holidays/{id}")
+    public ResponseEntity<?> deleteHoliday(@PathVariable Long id) {
+        holidayService.deleteHoliday(id);
+        return ResponseEntity.noContent().build();
     }
 }

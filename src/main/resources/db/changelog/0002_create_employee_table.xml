@@ -32,6 +32,7 @@
                              foreignKeyName="fk_employees_holidays_holiday_id"
                              referencedTableName="holiday"
                              referencedColumnNames="id"
+                             deleteCascade="true"
                 />
             </column>
         </createTable>
