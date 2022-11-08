@@ -11,5 +11,6 @@
     <include file="../testdata/0001_holidays.sql" relativeToChangelogFile="true" context="dev"/>
     <include file="../testdata/0002_employees.sql" relativeToChangelogFile="true" context="dev"/>
     <include file="../testdata/0003_employee_holidays.sql" relativeToChangelogFile="true" context="dev"/>
+    <include file="../testdata/0004_employee_roles.sql" relativeToChangelogFile="true" context="dev"/>
 
 </databaseChangeLog>

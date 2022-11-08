@@ -40,11 +40,7 @@ class CustomSecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return web -> web.ignoring().mvcMatchers(
-                "/img/**",
-                "/scripts/**",
-                "/styles/**"
-        );
+        return web -> web.ignoring().mvcMatchers();
     }
 
     @Bean

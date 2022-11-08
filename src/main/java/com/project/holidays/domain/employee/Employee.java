@@ -31,6 +31,14 @@ public class Employee {
     @OneToMany(cascade = CascadeType.REMOVE)
     private Set<Holiday> holidays = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "employees_roles",
+            joinColumns = @JoinColumn(name = "employee_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    private Set<EmployeeRole> roles = new HashSet<>();
+
     public Employee() {
     }
 
