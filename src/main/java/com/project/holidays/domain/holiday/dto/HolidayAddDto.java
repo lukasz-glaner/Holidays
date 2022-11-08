@@ -1,10 +1,18 @@
 package com.project.holidays.domain.holiday.dto;
 
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class HolidayAddDto {
+    @NotNull
+    @FutureOrPresent
     private LocalDateTime startDate;
+    @NotNull
+    @Future
     private LocalDateTime endDate;
+    @NotNull
     private Long approverId;
 
     public LocalDateTime getStartDate() {

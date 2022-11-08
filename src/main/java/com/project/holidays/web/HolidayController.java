@@ -9,13 +9,19 @@ import com.project.holidays.domain.holiday.Holiday;
 import com.project.holidays.domain.holiday.HolidayService;
 import com.project.holidays.domain.holiday.dto.HolidayAddDto;
 import com.project.holidays.domain.holiday.dto.HolidayDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @RestController
 public class HolidayController {
@@ -42,7 +48,7 @@ public class HolidayController {
 
     @Transactional
     @PostMapping("/holidays/add")
-    public ResponseEntity<?> addHoliday(@RequestBody HolidayAddDto holidayAddDto) {
+    public ResponseEntity<?> addHoliday(@RequestBody @Valid HolidayAddDto holidayAddDto) {
         Holiday holidayToAdd = prepareHolidayToAdd(holidayAddDto);
         HolidayDto savedHoliday = holidayService.createHoliday(holidayToAdd);
         return ResponseEntity.created(URI.create("/holidays?id=" + savedHoliday.getId()))
@@ -81,5 +87,13 @@ public class HolidayController {
     public ResponseEntity<?> deleteHoliday(@PathVariable Long id) {
         holidayService.deleteHoliday(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    Map<String, String> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        return ex.getBindingResult().getFieldErrors()
+                .stream()
+                .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
     }
 }
