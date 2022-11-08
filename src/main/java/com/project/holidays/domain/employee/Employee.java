@@ -3,6 +3,9 @@ package com.project.holidays.domain.employee;
 import com.project.holidays.domain.holiday.Holiday;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,9 +15,18 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
+    @Email
+    @Size(max = 100)
     private String email;
+    @NotNull
+    @Size(min = 5, max = 100)
     private String password;
+    @NotNull
+    @Size(min = 2, max = 100)
     private String firstName;
+    @NotNull
+    @Size(min = 2, max = 100)
     private String lastName;
     @OneToMany(cascade = CascadeType.REMOVE)
     private Set<Holiday> holidays = new HashSet<>();
