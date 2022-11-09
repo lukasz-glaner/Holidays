@@ -1,5 +1,6 @@
-package com.project.holidays.domain.holiday;
+package com.project.holidays.domain.holiday.mapper;
 
+import com.project.holidays.domain.holiday.Holiday;
 import com.project.holidays.domain.holiday.dto.HolidayDto;
 
 public class HolidayDtoMapper {

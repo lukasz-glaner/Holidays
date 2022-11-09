@@ -96,4 +96,8 @@ public class Employee {
     public void setHolidays(Set<Holiday> holidays) {
         this.holidays = holidays;
     }
+
+    public Set<EmployeeRole> getRoles() { return roles; }
+
+    public void setRoles(Set<EmployeeRole> roles) { this.roles = roles; }
 }

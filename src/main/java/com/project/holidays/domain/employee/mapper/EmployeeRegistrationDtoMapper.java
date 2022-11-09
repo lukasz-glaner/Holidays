@@ -1,5 +1,6 @@
-package com.project.holidays.domain.employee;
+package com.project.holidays.domain.employee.mapper;
 
+import com.project.holidays.domain.employee.Employee;
 import com.project.holidays.domain.employee.dto.EmployeeRegistrationDto;
 
 public class EmployeeRegistrationDtoMapper {

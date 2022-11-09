@@ -1,7 +1,11 @@
 package com.project.holidays.domain.employee;
 
+import com.project.holidays.domain.employee.dto.EmployeeCredentialsDto;
 import com.project.holidays.domain.employee.dto.EmployeeDto;
 import com.project.holidays.domain.employee.dto.EmployeeRegistrationDto;
+import com.project.holidays.domain.employee.mapper.EmployeeCredentialsDtoMapper;
+import com.project.holidays.domain.employee.mapper.EmployeeDtoMapper;
+import com.project.holidays.domain.employee.mapper.EmployeeRegistrationDtoMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,5 +39,10 @@ public class EmployeeService {
 
     public void deleteEmployee(Long id) {
         employeeRepository.deleteById(id);
+    }
+
+    public Optional<EmployeeCredentialsDto> findCredentialsByEmail(String email){
+        return employeeRepository.findByEmail(email)
+                .map(EmployeeCredentialsDtoMapper::map);
     }
 }
