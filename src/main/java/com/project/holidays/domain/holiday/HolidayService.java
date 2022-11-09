@@ -57,7 +57,7 @@ public class HolidayService {
     public void approveHoliday(Long id) {
         Holiday holidayToApprove = holidayRepository.findById(id).orElseThrow();
         Integer availableDays = 5; // here get days from employee from db
-        Integer holidayDaysAmount = Period.between(holidayToApprove.getEndDate(), holidayToApprove.getStartDate()).getDays();
+        Integer holidayDaysAmount = Period.between(holidayToApprove.getStartDate(), holidayToApprove.getEndDate()).getDays();
         Long holidayApproverId = holidayToApprove.getApproverId();
         Long approverId = 3L; // here get employeeId from credentials
         boolean approverCompliant = checkApprover(holidayApproverId, approverId);
