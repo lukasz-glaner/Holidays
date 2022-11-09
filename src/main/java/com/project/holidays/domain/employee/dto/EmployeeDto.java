@@ -11,6 +11,7 @@ public class EmployeeDto {
     private String password;
     private String firstName;
     private String lastName;
+    private Integer holidaysDaysAvailable;
     private Set<Holiday> holidays;
 
     public EmployeeDto() {
@@ -63,4 +64,8 @@ public class EmployeeDto {
     public void setHolidays(Set<Holiday> holidays) {
         this.holidays = holidays;
     }
+
+    public void setHolidaysDaysAvailable(Integer holidaysDaysAvailable) { this.holidaysDaysAvailable = holidaysDaysAvailable; }
+
+    public Integer getHolidaysDaysAvailable() { return holidaysDaysAvailable; }
 }

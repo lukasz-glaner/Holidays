@@ -4,9 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 public class Holiday {
@@ -14,9 +13,9 @@ public class Holiday {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    private LocalDateTime startDate;
+    private LocalDate startDate;
     @NotNull
-    private LocalDateTime endDate;
+    private LocalDate endDate;
     @NotNull
     private Long approverId;
     @NotNull
@@ -25,7 +24,7 @@ public class Holiday {
     public Holiday() {
     }
 
-    public Holiday(LocalDateTime startDate, LocalDateTime endDate, Long approverId, Boolean approved) {
+    public Holiday(LocalDate startDate, LocalDate endDate, Long approverId, Boolean approved) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.approverId = approverId;
@@ -40,19 +39,18 @@ public class Holiday {
         this.id = id;
     }
 
-    public LocalDateTime getStartDate() {
-        return startDate;
+    public LocalDate getStartDate() { return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

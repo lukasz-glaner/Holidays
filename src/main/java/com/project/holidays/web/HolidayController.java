@@ -9,6 +9,9 @@ import com.project.holidays.domain.holiday.Holiday;
 import com.project.holidays.domain.holiday.HolidayService;
 import com.project.holidays.domain.holiday.dto.HolidayAddDto;
 import com.project.holidays.domain.holiday.dto.HolidayDto;
+import com.project.holidays.exception.ApproverNotCompliantException;
+import com.project.holidays.exception.FreeDaysAmountToLowException;
+import com.project.holidays.exception.HolidayIsAlreadyApprovedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -76,12 +79,25 @@ public class HolidayController {
         }
         return ResponseEntity.noContent().build();
     }
-
     private Holiday applyPatch(Holiday holiday, JsonMergePatch patch) throws JsonPatchException, JsonProcessingException {
         JsonNode holidayNode = objectMapper.valueToTree(holiday);
         JsonNode holidayPatchedNode = patch.apply(holidayNode);
         return objectMapper.treeToValue(holidayPatchedNode, Holiday.class);
     }
+    @Transactional
+    @PatchMapping("/holidays/approve/{id}")
+    public @ResponseBody ResponseEntity<?> approveHoliday(@PathVariable Long id) {
+        try {
+            holidayService.approveHoliday(id);
+        } catch ( HolidayIsAlreadyApprovedException | FreeDaysAmountToLowException | ApproverNotCompliantException e ) {
+            return ResponseEntity.badRequest().build();
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.noContent().build();
+    }
+
+
 
     @DeleteMapping("/holidays/{id}")
     public ResponseEntity<?> deleteHoliday(@PathVariable Long id) {

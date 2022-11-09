@@ -25,8 +25,8 @@ class CustomSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authz) -> authz
-                        .mvcMatchers("/holidays/add").authenticated()
-                        .mvcMatchers("/registration").hasAnyRole(ADMIN_ROLE)
+//                        .mvcMatchers("/holidays/add").authenticated()
+//                        .mvcMatchers("/registration").hasAnyRole(ADMIN_ROLE)
                         .anyRequest().permitAll()
                 );
 //                .formLogin(login -> login

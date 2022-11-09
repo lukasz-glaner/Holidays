@@ -3,31 +3,31 @@ package com.project.holidays.domain.holiday.dto;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class HolidayAddDto {
     @NotNull
     @FutureOrPresent
-    private LocalDateTime startDate;
+    private LocalDate startDate;
     @NotNull
     @Future
-    private LocalDateTime endDate;
+    private LocalDate endDate;
     @NotNull
     private Long approverId;
 
-    public LocalDateTime getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

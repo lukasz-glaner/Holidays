@@ -9,10 +9,10 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="start_date" type="DATETIME">
+            <column name="start_date" type="DATE">
                 <constraints nullable="false"/>
             </column>
-            <column name="end_date" type="DATETIME">
+            <column name="end_date" type="DATE">
                 <constraints nullable="false"/>
             </column>
             <column name="approver_id" type="BIGINT">

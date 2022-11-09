@@ -28,6 +28,9 @@ public class Employee {
     @NotNull
     @Size(min = 2, max = 100)
     private String lastName;
+    @NotNull
+    @Size(min = 0)
+    private Integer holidaysDaysAvailable;
     @OneToMany(cascade = CascadeType.REMOVE)
     private Set<Holiday> holidays = new HashSet<>();
 
@@ -42,11 +45,12 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String email, String password, String firstName, String lastName) {
+    public Employee(String email, String password, String firstName, String lastName, Integer holidaysDaysAvailable) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.holidaysDaysAvailable = holidaysDaysAvailable;
     }
 
     public Long getId() {
@@ -88,6 +92,10 @@ public class Employee {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public Integer getHolidaysDaysAvailable() { return holidaysDaysAvailable; }
+
+    public void setHolidaysDaysAvailable(Integer holidaysDaysAvailable) { this.holidaysDaysAvailable = holidaysDaysAvailable; }
 
     public Set<Holiday> getHolidays() {
         return holidays;
