@@ -18,7 +18,6 @@ public class HolidayService {
     private final HolidayRepository holidayRepository;
     private final EmployeeRepository employeeRepository;
 
-
     public HolidayService(HolidayRepository holidayRepository, EmployeeRepository employeeRepository) {
         this.holidayRepository = holidayRepository;
         this.employeeRepository = employeeRepository;

@@ -44,6 +44,9 @@
                              referencedTableName="holiday"
                              referencedColumnNames="id"
                              deleteCascade="true"
+                             unique="true"
+
+
                 />
             </column>
         </createTable>
